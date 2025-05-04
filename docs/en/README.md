@@ -4,7 +4,11 @@ description: <!-- sync:ID001:start -->
 
 # hardware-specifications
 
-待翻譯的新段落…
+\<!-- sync:ID001:start -->
+
+這段將由試算表自動更新
+
+\<!-- sync:ID001:end -->
 
 ...
 
