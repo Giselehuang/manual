@@ -1,9 +1,9 @@
-name: Update ZH/JA Docs
+name: Update ZH/JA Docs
 
 on:
-  workflow_dispatch:       # 手動按鈕
-  schedule:
-    - cron:  '0 3 * * *'   # 每天凌晨 3 點自動跑
+  workflow_dispatch:              # 手動鈕
+  # schedule:
+  #   - cron: '0 3 * * *'         # 之後想定時再打開
 
 jobs:
   i18n:
@@ -11,17 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1. 下載你的 CSV 翻譯表
       - name: Fetch translation sheet
         run: |
-          curl -L "$SHEET_CSV_URL" -o translations.csv
+          curl -L "https://docs.google.com/spreadsheets/d/1juP5Sy3VnptGwzq9eKGid55iGo-wB7r_Fs4cqjvyFZE/export?format=csv" -o translations.csv
 
-      # 2. 把 CSV 轉成 markdown 檔
       - name: Build markdown
         run: |
           python scripts/csv2md.py translations.csv docs
 
-      # 3. 若有變動就 commit 回 repo
       - name: Commit back
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
